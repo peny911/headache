@@ -140,12 +140,12 @@ enum HeadacheReportPDFRenderer {
         try renderer.writePDF(to: url) { context in
             let writer = PDFTextWriter(context: context, pageRect: pageRect)
             writer.beginPage()
-            writer.write("头痛就诊参考报告", font: .boldSystemFont(ofSize: 24), color: .label, spacingAfter: 12)
-            writer.write("本报告由用户记录生成，仅用于辅助医生了解头痛发作模式，不提供医学诊断、疾病概率或治疗建议。", font: .systemFont(ofSize: 10), color: .secondaryLabel, spacingAfter: 18)
+            writer.write("头痛就诊参考报告", font: .boldSystemFont(ofSize: 24), color: .pdfText, spacingAfter: 12)
+            writer.write("本报告由用户记录生成，仅用于辅助医生了解头痛发作模式，不提供医学诊断、疾病概率或治疗建议。", font: .systemFont(ofSize: 10), color: .pdfSecondaryText, spacingAfter: 18)
 
             if report.hasRedFlags {
-                writer.write("风险提示", font: .boldSystemFont(ofSize: 16), color: .systemRed, spacingAfter: 6)
-                writer.write("如出现以下情况，建议及时就医或急诊评估。", font: .boldSystemFont(ofSize: 12), color: .systemRed, spacingAfter: 12)
+                writer.write("风险提示", font: .boldSystemFont(ofSize: 16), color: .pdfWarning, spacingAfter: 6)
+                writer.write("如出现以下情况，建议及时就医或急诊评估。", font: .boldSystemFont(ofSize: 12), color: .pdfWarning, spacingAfter: 12)
             }
 
             writeSummary(report, writer: writer)
@@ -173,7 +173,7 @@ enum HeadacheReportPDFRenderer {
     private static func writeProfile(_ profile: UserProfile?, writer: PDFTextWriter) {
         writer.writeSectionTitle("患者信息")
         guard let profile else {
-            writer.write("暂无基础信息。", font: .systemFont(ofSize: 11), color: .secondaryLabel, spacingAfter: 8)
+            writer.write("暂无基础信息。", font: .systemFont(ofSize: 11), color: .pdfSecondaryText, spacingAfter: 8)
             return
         }
 
@@ -205,10 +205,10 @@ enum HeadacheReportPDFRenderer {
 
     private static func writeMedications(_ report: HeadacheReport, writer: PDFTextWriter) {
         writer.writeSectionTitle("用药概览")
-        writer.write("近 30 天用药天数：\(report.medicationDaysInLast30Days) 天", font: .systemFont(ofSize: 11), color: .label, spacingAfter: 6)
+        writer.write("近 30 天用药天数：\(report.medicationDaysInLast30Days) 天", font: .systemFont(ofSize: 11), color: .pdfText, spacingAfter: 6)
 
         if report.medicationSummaries.isEmpty {
-            writer.write("暂无用药记录。", font: .systemFont(ofSize: 11), color: .secondaryLabel, spacingAfter: 8)
+            writer.write("暂无用药记录。", font: .systemFont(ofSize: 11), color: .pdfSecondaryText, spacingAfter: 8)
             return
         }
 
@@ -217,7 +217,7 @@ enum HeadacheReportPDFRenderer {
             if let commonDoseText = summary.commonDoseText {
                 text += "，常见剂量 \(commonDoseText)"
             }
-            writer.write("• \(text)", font: .systemFont(ofSize: 11), color: .label, spacingAfter: 4)
+            writer.write("• \(text)", font: .systemFont(ofSize: 11), color: .pdfText, spacingAfter: 4)
         }
         writer.addSpacing(6)
     }
@@ -225,12 +225,12 @@ enum HeadacheReportPDFRenderer {
     private static func writeEpisodes(_ report: HeadacheReport, writer: PDFTextWriter) {
         writer.writeSectionTitle("完整发作明细")
         guard !report.episodes.isEmpty else {
-            writer.write("暂无头痛记录。", font: .systemFont(ofSize: 11), color: .secondaryLabel, spacingAfter: 8)
+            writer.write("暂无头痛记录。", font: .systemFont(ofSize: 11), color: .pdfSecondaryText, spacingAfter: 8)
             return
         }
 
         for (index, episode) in report.episodes.enumerated() {
-            writer.write("\(index + 1). \(HeadacheFormatters.dateTime.string(from: episode.startedAt))", font: .boldSystemFont(ofSize: 12), color: .label, spacingAfter: 4)
+            writer.write("\(index + 1). \(HeadacheFormatters.dateTime.string(from: episode.startedAt))", font: .boldSystemFont(ofSize: 12), color: .pdfText, spacingAfter: 4)
             writer.writeKeyValues([
                 ("持续时间", HeadacheFormatters.duration(episode.duration)),
                 ("疼痛等级", "\(episode.painLevel) / 10"),
@@ -276,17 +276,19 @@ private final class PDFTextWriter {
 
     func beginPage() {
         context.beginPage()
+        UIColor.white.setFill()
+        UIRectFill(pageRect)
         y = margin
     }
 
     func writeSectionTitle(_ title: String) {
         addSpacing(8)
-        write(title, font: .boldSystemFont(ofSize: 16), color: .label, spacingAfter: 8)
+        write(title, font: .boldSystemFont(ofSize: 16), color: .pdfText, spacingAfter: 8)
     }
 
     func writeKeyValues(_ items: [(String, String)]) {
         for item in items {
-            write("\(item.0)：\(item.1)", font: .systemFont(ofSize: 11), color: .label, spacingAfter: 4)
+            write("\(item.0)：\(item.1)", font: .systemFont(ofSize: 11), color: .pdfText, spacingAfter: 4)
         }
         addSpacing(4)
     }
@@ -357,4 +359,10 @@ private final class PDFTextWriter {
 
         return best
     }
+}
+
+private extension UIColor {
+    static let pdfText = UIColor(red: 0.08, green: 0.08, blue: 0.08, alpha: 1)
+    static let pdfSecondaryText = UIColor(red: 0.34, green: 0.34, blue: 0.34, alpha: 1)
+    static let pdfWarning = UIColor(red: 0.74, green: 0.12, blue: 0.12, alpha: 1)
 }
