@@ -38,6 +38,11 @@ struct EpisodeEditView: View {
     @State private var sleepHoursText: String
     @State private var locationPains: [HeadacheLocation: PainSeverity]
     @State private var selectedTriggers: Set<HeadacheTrigger>
+    @State private var selectedPainQualities: Set<PainQuality>
+    @State private var selectedAssociatedSymptoms: Set<AssociatedSymptom>
+    @State private var selectedActivityImpact: ActivityImpact?
+    @State private var selectedReliefEffect: ReliefEffect?
+    @State private var selectedRedFlags: Set<RedFlagSymptom>
     @State private var note: String
     @State private var medicationDrafts: [MedicationDraft]
     @State private var validationMessage: String?
@@ -51,6 +56,11 @@ struct EpisodeEditView: View {
         _sleepHoursText = State(initialValue: episode?.sleepHours.map { String(format: "%.1f", $0) } ?? "")
         _locationPains = State(initialValue: episode?.locationPains ?? [:])
         _selectedTriggers = State(initialValue: Set(episode?.triggers ?? []))
+        _selectedPainQualities = State(initialValue: Set(episode?.painQualities ?? []))
+        _selectedAssociatedSymptoms = State(initialValue: Set(episode?.associatedSymptoms ?? []))
+        _selectedActivityImpact = State(initialValue: episode?.activityImpact)
+        _selectedReliefEffect = State(initialValue: episode?.reliefEffect)
+        _selectedRedFlags = State(initialValue: Set(episode?.redFlags ?? []))
         _note = State(initialValue: episode?.note ?? "")
         _medicationDrafts = State(initialValue: episode?.medicationIntakes
             .sorted { $0.takenAt < $1.takenAt }
@@ -96,7 +106,55 @@ struct EpisodeEditView: View {
                 }
 
                 Section("诱因") {
-                    TriggerPicker(selection: $selectedTriggers)
+                    SelectionChipPicker(
+                        options: HeadacheTrigger.allCases,
+                        selection: $selectedTriggers,
+                        title: \.title
+                    )
+                }
+
+                Section("疼痛性质") {
+                    SelectionChipPicker(
+                        options: PainQuality.allCases,
+                        selection: $selectedPainQualities,
+                        title: \.title
+                    )
+                }
+
+                Section("伴随症状") {
+                    SelectionChipPicker(
+                        options: AssociatedSymptom.allCases,
+                        selection: $selectedAssociatedSymptoms,
+                        title: \.title
+                    )
+                }
+
+                Section("活动影响") {
+                    SingleSelectionChipPicker(
+                        options: ActivityImpact.allCases,
+                        selection: $selectedActivityImpact,
+                        title: \.title
+                    )
+                }
+
+                Section("缓解效果") {
+                    SingleSelectionChipPicker(
+                        options: ReliefEffect.allCases,
+                        selection: $selectedReliefEffect,
+                        title: \.title
+                    )
+                }
+
+                Section {
+                    SelectionChipPicker(
+                        options: RedFlagSymptom.allCases,
+                        selection: $selectedRedFlags,
+                        title: \.title
+                    )
+                } header: {
+                    Text("需及时就医的情况")
+                } footer: {
+                    Text("如出现以下情况，建议及时就医或急诊评估。")
                 }
 
                 Section("药物") {
@@ -171,6 +229,11 @@ struct EpisodeEditView: View {
         target.sleepHours = normalizedSleepHours
         target.locationPains = locationPains
         target.triggers = Array(selectedTriggers).sorted { $0.title < $1.title }
+        target.painQualities = Array(selectedPainQualities).sorted { $0.title < $1.title }
+        target.associatedSymptoms = Array(selectedAssociatedSymptoms).sorted { $0.title < $1.title }
+        target.activityImpact = selectedActivityImpact
+        target.reliefEffect = selectedReliefEffect
+        target.redFlags = Array(selectedRedFlags).sorted { $0.title < $1.title }
         target.note = note
         target.updatedAt = .now
 
@@ -230,21 +293,47 @@ struct EpisodeEditView: View {
     }
 }
 
-private struct TriggerPicker: View {
-    @Binding var selection: Set<HeadacheTrigger>
+private struct SelectionChipPicker<Option: Hashable & Identifiable>: View {
+    let options: [Option]
+    @Binding var selection: Set<Option>
+    let title: KeyPath<Option, String>
 
     var body: some View {
         FlowLayout(spacing: 8, rowSpacing: 8) {
-            ForEach(HeadacheTrigger.allCases) { trigger in
-                let isSelected = selection.contains(trigger)
+            ForEach(options) { option in
+                let isSelected = selection.contains(option)
                 Button {
                     if isSelected {
-                        selection.remove(trigger)
+                        selection.remove(option)
                     } else {
-                        selection.insert(trigger)
+                        selection.insert(option)
                     }
                 } label: {
-                    Text(trigger.title)
+                    Text(option[keyPath: title])
+                        .font(.subheadline.weight(.medium))
+                }
+                .buttonStyle(.bordered)
+                .tint(isSelected ? .accentColor : .secondary)
+                .accessibilityAddTraits(isSelected ? .isSelected : [])
+            }
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+private struct SingleSelectionChipPicker<Option: Hashable & Identifiable>: View {
+    let options: [Option]
+    @Binding var selection: Option?
+    let title: KeyPath<Option, String>
+
+    var body: some View {
+        FlowLayout(spacing: 8, rowSpacing: 8) {
+            ForEach(options) { option in
+                let isSelected = selection == option
+                Button {
+                    selection = isSelected ? nil : option
+                } label: {
+                    Text(option[keyPath: title])
                         .font(.subheadline.weight(.medium))
                 }
                 .buttonStyle(.bordered)

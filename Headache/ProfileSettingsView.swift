@@ -29,6 +29,8 @@ struct ProfileSettingsView: View {
         target.age = HeadacheValidators.normalizedProfileNumber(draft.age)
         target.headacheYears = HeadacheValidators.normalizedProfileNumber(draft.headacheYears)
         target.medicalHistory = draft.medicalHistory
+        target.patientName = draft.patientName
+        target.hospitalName = draft.hospitalName
         target.updatedAt = .now
 
         if sortedProfiles.isEmpty {
@@ -56,6 +58,8 @@ struct ProfileOnboardingView: View {
                 target.age = HeadacheValidators.normalizedProfileNumber(draft.age)
                 target.headacheYears = HeadacheValidators.normalizedProfileNumber(draft.headacheYears)
                 target.medicalHistory = draft.medicalHistory
+                target.patientName = draft.patientName
+                target.hospitalName = draft.hospitalName
                 target.updatedAt = .now
 
                 if sortedProfiles.isEmpty {
@@ -78,12 +82,23 @@ private struct ProfileDraft {
     var age: Int
     var headacheYears: Int
     var medicalHistory: String
+    var patientName: String
+    var hospitalName: String
 
-    init(gender: UserGender, age: Int, headacheYears: Int, medicalHistory: String) {
+    init(
+        gender: UserGender,
+        age: Int,
+        headacheYears: Int,
+        medicalHistory: String,
+        patientName: String = "",
+        hospitalName: String = ""
+    ) {
         self.gender = gender
         self.age = age
         self.headacheYears = headacheYears
         self.medicalHistory = medicalHistory
+        self.patientName = patientName
+        self.hospitalName = hospitalName
     }
 
     init(profile: UserProfile) {
@@ -91,6 +106,8 @@ private struct ProfileDraft {
         self.age = profile.age
         self.headacheYears = profile.headacheYears
         self.medicalHistory = profile.medicalHistory
+        self.patientName = profile.patientName
+        self.hospitalName = profile.hospitalName
     }
 
     static var saved: ProfileDraft? {
@@ -99,7 +116,9 @@ private struct ProfileDraft {
             gender: UserGender(rawValue: UserDefaults.standard.string(forKey: "profileGender") ?? "") ?? .female,
             age: UserDefaults.standard.integer(forKey: "profileAge"),
             headacheYears: UserDefaults.standard.integer(forKey: "profileHeadacheYears"),
-            medicalHistory: UserDefaults.standard.string(forKey: "profileMedicalHistory") ?? ""
+            medicalHistory: UserDefaults.standard.string(forKey: "profileMedicalHistory") ?? "",
+            patientName: UserDefaults.standard.string(forKey: "profilePatientName") ?? "",
+            hospitalName: UserDefaults.standard.string(forKey: "profileHospitalName") ?? ""
         )
     }
 
@@ -109,6 +128,8 @@ private struct ProfileDraft {
         UserDefaults.standard.set(age, forKey: "profileAge")
         UserDefaults.standard.set(headacheYears, forKey: "profileHeadacheYears")
         UserDefaults.standard.set(medicalHistory, forKey: "profileMedicalHistory")
+        UserDefaults.standard.set(patientName, forKey: "profilePatientName")
+        UserDefaults.standard.set(hospitalName, forKey: "profileHospitalName")
     }
 }
 
@@ -120,6 +141,8 @@ private struct ProfileForm: View {
     @State private var gender: UserGender
     @State private var age: Int
     @State private var headacheYears: Int
+    @State private var patientName: String
+    @State private var hospitalName: String
     @State private var medicalHistory: String
     @State private var savedMessage: String?
 
@@ -130,6 +153,8 @@ private struct ProfileForm: View {
         _gender = State(initialValue: draft?.gender ?? .female)
         _age = State(initialValue: draft?.age ?? 30)
         _headacheYears = State(initialValue: draft?.headacheYears ?? 0)
+        _patientName = State(initialValue: draft?.patientName ?? "")
+        _hospitalName = State(initialValue: draft?.hospitalName ?? "")
         _medicalHistory = State(initialValue: draft?.medicalHistory ?? "")
     }
 
@@ -152,6 +177,12 @@ private struct ProfileForm: View {
 
                 Stepper("年龄 \(age) 岁", value: $age, in: 0...120)
                 Stepper("头痛 \(headacheYears) 年", value: $headacheYears, in: 0...120)
+            }
+
+            Section("就诊报告") {
+                TextField("姓名（可选）", text: $patientName)
+                    .textContentType(.name)
+                TextField("就诊医院（可选）", text: $hospitalName)
             }
 
             Section("病史描述") {
@@ -188,7 +219,9 @@ private struct ProfileForm: View {
                 gender: gender,
                 age: age,
                 headacheYears: headacheYears,
-                medicalHistory: medicalHistory
+                medicalHistory: medicalHistory,
+                patientName: HeadacheValidators.normalizedMedicationName(patientName),
+                hospitalName: HeadacheValidators.normalizedMedicationName(hospitalName)
             )
         )
         savedMessage = "已保存"

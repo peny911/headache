@@ -84,6 +84,16 @@ struct StatsView: View {
                 }
             }
             .navigationTitle("统计")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        ReportPreviewView()
+                    } label: {
+                        Image(systemName: "doc.text.magnifyingglass")
+                    }
+                    .accessibilityLabel("导出就诊报告")
+                }
+            }
         }
     }
 

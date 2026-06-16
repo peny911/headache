@@ -156,6 +156,114 @@ enum HeadacheTrigger: String, CaseIterable, Identifiable, Codable {
     }
 }
 
+enum PainQuality: String, CaseIterable, Identifiable, Codable {
+    case pulsating
+    case pressing
+    case stabbing
+    case electric
+    case distending
+    case other
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .pulsating: "搏动"
+        case .pressing: "压迫/紧箍"
+        case .stabbing: "针刺"
+        case .electric: "电击"
+        case .distending: "胀痛"
+        case .other: "其他"
+        }
+    }
+}
+
+enum AssociatedSymptom: String, CaseIterable, Identifiable, Codable {
+    case nausea
+    case vomiting
+    case photophobia
+    case phonophobia
+    case visualAura
+    case numbnessOrWeakness
+    case dizziness
+    case tearingOrNasalCongestion
+    case other
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .nausea: "恶心"
+        case .vomiting: "呕吐"
+        case .photophobia: "畏光"
+        case .phonophobia: "畏声"
+        case .visualAura: "视觉先兆"
+        case .numbnessOrWeakness: "麻木/无力"
+        case .dizziness: "眩晕"
+        case .tearingOrNasalCongestion: "流泪/鼻塞"
+        case .other: "其他"
+        }
+    }
+}
+
+enum ActivityImpact: String, CaseIterable, Identifiable, Codable {
+    case none
+    case worsensWithActivity
+    case needsRest
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .none: "不影响"
+        case .worsensWithActivity: "活动后加重"
+        case .needsRest: "需要休息/卧床"
+        }
+    }
+}
+
+enum ReliefEffect: String, CaseIterable, Identifiable, Codable {
+    case untreated
+    case spontaneous
+    case sleep
+    case medicationEffective
+    case medicationIneffective
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .untreated: "未处理"
+        case .spontaneous: "自行缓解"
+        case .sleep: "睡眠缓解"
+        case .medicationEffective: "用药后缓解"
+        case .medicationIneffective: "用药无明显缓解"
+        }
+    }
+}
+
+enum RedFlagSymptom: String, CaseIterable, Identifiable, Codable {
+    case thunderclap
+    case feverOrNeckStiffness
+    case afterTrauma
+    case neurologicDeficit
+    case progressiveWorsening
+    case newTypeHeadache
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .thunderclap: "突发最严重头痛"
+        case .feverOrNeckStiffness: "发热/颈僵"
+        case .afterTrauma: "外伤后头痛"
+        case .neurologicDeficit: "神经异常"
+        case .progressiveWorsening: "进行性加重"
+        case .newTypeHeadache: "首次出现的新型头痛"
+        }
+    }
+}
+
 @Model
 final class UserProfile {
     var id: UUID
@@ -163,6 +271,8 @@ final class UserProfile {
     var age: Int
     var headacheYears: Int
     var medicalHistory: String
+    var patientName: String = ""
+    var hospitalName: String = ""
     var updatedAt: Date
 
     init(
@@ -171,6 +281,8 @@ final class UserProfile {
         age: Int = 30,
         headacheYears: Int = 0,
         medicalHistory: String = "",
+        patientName: String = "",
+        hospitalName: String = "",
         updatedAt: Date = .now
     ) {
         self.id = id
@@ -178,6 +290,8 @@ final class UserProfile {
         self.age = age
         self.headacheYears = headacheYears
         self.medicalHistory = medicalHistory
+        self.patientName = patientName
+        self.hospitalName = hospitalName
         self.updatedAt = updatedAt
     }
 
@@ -196,6 +310,11 @@ final class HeadacheEpisode {
     var sleepHours: Double?
     var locationPainRawValues: [String] = []
     var triggerRawValues: [String] = []
+    var painQualityRawValues: [String] = []
+    var associatedSymptomRawValues: [String] = []
+    var activityImpactRawValue: String?
+    var reliefEffectRawValue: String?
+    var redFlagRawValues: [String] = []
     var note: String
     var createdAt: Date
     var updatedAt: Date
@@ -211,6 +330,11 @@ final class HeadacheEpisode {
         sleepHours: Double? = nil,
         locationPains: [HeadacheLocation: PainSeverity] = [:],
         triggers: [HeadacheTrigger] = [],
+        painQualities: [PainQuality] = [],
+        associatedSymptoms: [AssociatedSymptom] = [],
+        activityImpact: ActivityImpact? = nil,
+        reliefEffect: ReliefEffect? = nil,
+        redFlags: [RedFlagSymptom] = [],
         note: String = "",
         createdAt: Date = .now,
         updatedAt: Date = .now,
@@ -223,6 +347,11 @@ final class HeadacheEpisode {
         self.sleepHours = sleepHours
         self.locationPainRawValues = locationPains.map { "\($0.key.rawValue):\($0.value.rawValue)" }
         self.triggerRawValues = triggers.map(\.rawValue)
+        self.painQualityRawValues = painQualities.map(\.rawValue)
+        self.associatedSymptomRawValues = associatedSymptoms.map(\.rawValue)
+        self.activityImpactRawValue = activityImpact?.rawValue
+        self.reliefEffectRawValue = reliefEffect?.rawValue
+        self.redFlagRawValues = redFlags.map(\.rawValue)
         self.note = note
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -259,6 +388,37 @@ final class HeadacheEpisode {
     var triggers: [HeadacheTrigger] {
         get { triggerRawValues.compactMap(HeadacheTrigger.init(rawValue:)) }
         set { triggerRawValues = newValue.map(\.rawValue) }
+    }
+
+    var painQualities: [PainQuality] {
+        get { painQualityRawValues.compactMap(PainQuality.init(rawValue:)) }
+        set { painQualityRawValues = newValue.map(\.rawValue) }
+    }
+
+    var associatedSymptoms: [AssociatedSymptom] {
+        get { associatedSymptomRawValues.compactMap(AssociatedSymptom.init(rawValue:)) }
+        set { associatedSymptomRawValues = newValue.map(\.rawValue) }
+    }
+
+    var activityImpact: ActivityImpact? {
+        get {
+            guard let activityImpactRawValue else { return nil }
+            return ActivityImpact(rawValue: activityImpactRawValue)
+        }
+        set { activityImpactRawValue = newValue?.rawValue }
+    }
+
+    var reliefEffect: ReliefEffect? {
+        get {
+            guard let reliefEffectRawValue else { return nil }
+            return ReliefEffect(rawValue: reliefEffectRawValue)
+        }
+        set { reliefEffectRawValue = newValue?.rawValue }
+    }
+
+    var redFlags: [RedFlagSymptom] {
+        get { redFlagRawValues.compactMap(RedFlagSymptom.init(rawValue:)) }
+        set { redFlagRawValues = newValue.map(\.rawValue) }
     }
 
     var duration: TimeInterval? {

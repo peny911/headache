@@ -17,6 +17,14 @@ enum HeadacheFormatters {
         return formatter
     }()
 
+    static let decimal: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "zh_CN")
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+
     static func duration(_ interval: TimeInterval?) -> String {
         guard let interval else { return "进行中" }
         let minutes = max(Int(interval / 60), 0)
