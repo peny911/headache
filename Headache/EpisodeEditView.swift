@@ -219,10 +219,14 @@ struct EpisodeEditView: View {
     }
 
     private var profileGender: UserGender {
-        profiles
+        savedProfileGender ?? profiles
             .sorted { $0.updatedAt > $1.updatedAt }
             .compactMap { UserGender(rawValue: $0.genderRawValue) }
             .first ?? .female
+    }
+
+    private var savedProfileGender: UserGender? {
+        UserGender(rawValue: UserDefaults.standard.string(forKey: "profileGender") ?? "")
     }
 }
 

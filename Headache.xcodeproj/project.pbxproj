@@ -21,6 +21,7 @@
 		2A000001000000000000000C /* HeadacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010C /* HeadacheTests.swift */; };
 		2A000001000000000000000D /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010E /* ProfileSettingsView.swift */; };
 		2A000001000000000000000E /* head_regions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010F /* head_regions.json */; };
+		2A000001000000000000000F /* HeadPainRegionEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000110 /* HeadPainRegionEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		2A000001000000000000010D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A000001000000000000010E /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
 		2A000001000000000000010F /* head_regions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = head_regions.json; sourceTree = "<group>"; };
+		2A0000010000000000000110 /* HeadPainRegionEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadPainRegionEditor.swift; sourceTree = "<group>"; };
 		2A0000010000000000000501 /* Headache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Headache.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0000010000000000000502 /* HeadacheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeadacheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				2A0000010000000000000106 /* EpisodeListView.swift */,
 				2A0000010000000000000107 /* EpisodeEditView.swift */,
 				2A0000010000000000000108 /* HeadPainMapPicker.swift */,
+				2A0000010000000000000110 /* HeadPainRegionEditor.swift */,
 				2A0000010000000000000109 /* StatsView.swift */,
 				2A000001000000000000010A /* MedicationListView.swift */,
 				2A000001000000000000010E /* ProfileSettingsView.swift */,
@@ -227,6 +230,7 @@
 				2A0000010000000000000006 /* EpisodeListView.swift in Sources */,
 				2A0000010000000000000007 /* EpisodeEditView.swift in Sources */,
 				2A0000010000000000000008 /* HeadPainMapPicker.swift in Sources */,
+				2A000001000000000000000F /* HeadPainRegionEditor.swift in Sources */,
 				2A0000010000000000000009 /* StatsView.swift in Sources */,
 				2A000001000000000000000A /* MedicationListView.swift in Sources */,
 				2A000001000000000000000D /* ProfileSettingsView.swift in Sources */,

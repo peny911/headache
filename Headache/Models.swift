@@ -194,7 +194,7 @@ final class HeadacheEpisode {
     var endedAt: Date?
     var painLevel: Int
     var sleepHours: Double?
-    var locationPainRawValues: [String]
+    var locationPainRawValues: [String] = []
     var triggerRawValues: [String] = []
     var note: String
     var createdAt: Date

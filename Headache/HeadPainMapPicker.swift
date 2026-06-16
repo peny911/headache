@@ -21,6 +21,9 @@ struct HeadPainMapPicker: View {
 
     @State private var selectedSide: HeadViewSide = .front
     @State private var regionStore = HeadPainRegionStore.load()
+#if DEBUG
+    @State private var isRegionEditorPresented = false
+#endif
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -29,6 +32,10 @@ struct HeadPainMapPicker: View {
                     .font(.headline)
                 Spacer()
 #if DEBUG
+                Button("编辑热区") {
+                    isRegionEditorPresented = true
+                }
+                .font(.caption)
                 Button("重新加载热区") {
                     regionStore = HeadPainRegionStore.load()
                 }
@@ -81,6 +88,13 @@ struct HeadPainMapPicker: View {
                     .foregroundStyle(.secondary)
             }
         }
+#if DEBUG
+        .sheet(isPresented: $isRegionEditorPresented) {
+            HeadPainRegionEditor(gender: gender) {
+                regionStore = HeadPainRegionStore.load()
+            }
+        }
+#endif
     }
 
     private var summary: String {
@@ -137,7 +151,7 @@ private struct HeadPainMap: View {
                         .scaledToFit()
                         .frame(width: size.width, height: size.height)
 
-                    ForEach(regionStore.regions(for: side)) { region in
+                    ForEach(regionStore.regions(for: side, gender: gender)) { region in
                         regionView(region, in: size)
                     }
                 }
@@ -236,8 +250,10 @@ struct HeadPainRegion: Identifiable {
 }
 
 struct HeadPainRegionStore {
-    let frontRegions: [HeadPainRegion]
-    let backRegions: [HeadPainRegion]
+    let femaleFrontRegions: [HeadPainRegion]
+    let femaleBackRegions: [HeadPainRegion]
+    let maleFrontRegions: [HeadPainRegion]
+    let maleBackRegions: [HeadPainRegion]
     let sourceDescription: String
     let errorMessage: String?
 
@@ -247,29 +263,35 @@ struct HeadPainRegionStore {
             let data = try Data(contentsOf: regionsURL)
             let payload = try JSONDecoder().decode(HeadPainRegionPayload.self, from: data)
             return HeadPainRegionStore(
-                frontRegions: try payload.regions(for: .front),
-                backRegions: try payload.regions(for: .back),
+                femaleFrontRegions: try payload.regions(for: .front, gender: .female),
+                femaleBackRegions: try payload.regions(for: .back, gender: .female),
+                maleFrontRegions: try payload.regions(for: .front, gender: .male),
+                maleBackRegions: try payload.regions(for: .back, gender: .male),
                 sourceDescription: "热区来源：\(sourceDescription(for: regionsURL))",
                 errorMessage: nil
             )
         } catch {
             return HeadPainRegionStore(
-                frontRegions: [],
-                backRegions: [],
+                femaleFrontRegions: [],
+                femaleBackRegions: [],
+                maleFrontRegions: [],
+                maleBackRegions: [],
                 sourceDescription: "热区来源：加载失败",
                 errorMessage: "热区加载失败：\(error.localizedDescription)"
             )
         }
     }
 
-    func regions(for side: HeadViewSide) -> [HeadPainRegion] {
-        switch side {
-        case .front: frontRegions
-        case .back: backRegions
+    func regions(for side: HeadViewSide, gender: UserGender) -> [HeadPainRegion] {
+        switch (gender, side) {
+        case (.female, .front): femaleFrontRegions
+        case (.female, .back): femaleBackRegions
+        case (.male, .front): maleFrontRegions
+        case (.male, .back): maleBackRegions
         }
     }
 
-    private static func regionsURL() throws -> URL {
+    static func regionsURL() throws -> URL {
         let fileManager = FileManager.default
         let documentsURL = try fileManager.url(
             for: .documentDirectory,
@@ -293,6 +315,22 @@ struct HeadPainRegionStore {
         throw HeadPainRegionLoadError.missingFile
     }
 
+#if DEBUG
+    static var projectRegionsURL: URL {
+        URL(fileURLWithPath: "/Users/patrick/Projects/Headache/Headache/head_regions.json")
+    }
+
+    static func documentsRegionsURL() throws -> URL {
+        let documentsURL = try FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+        )
+        return documentsURL.appendingPathComponent("head_regions.json")
+    }
+#endif
+
     private static func sourceDescription(for url: URL) -> String {
         if url.path.contains("/Documents/head_regions.json") {
             return "Documents/head_regions.json"
@@ -306,7 +344,7 @@ struct HeadPainRegionStore {
 
 private enum HeadPainRegionLoadError: LocalizedError {
     case missingFile
-    case missingSide(HeadViewSide)
+    case missingSide(UserGender, HeadViewSide)
     case invalidLocation(String)
     case invalidPointCount(String)
     case invalidCoordinate(String)
@@ -314,7 +352,7 @@ private enum HeadPainRegionLoadError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .missingFile: "未找到 head_regions.json"
-        case .missingSide(let side): "head_regions.json 缺少 \(side.title)"
+        case .missingSide(let gender, let side): "head_regions.json 缺少 \(gender.title) / \(side.title)"
         case .invalidLocation(let rawValue): "未知热区位置：\(rawValue)"
         case .invalidPointCount(let location): "\(location) 至少需要 3 个坐标点"
         case .invalidCoordinate(let location): "\(location) 坐标必须是 [x, y] 且范围为 0...1"
@@ -323,18 +361,27 @@ private enum HeadPainRegionLoadError: LocalizedError {
 }
 
 private struct HeadPainRegionPayload: Decodable {
+    let female: HeadPainGenderRegionPayload?
+    let male: HeadPainGenderRegionPayload?
     let front: [String: [[Double]]]?
     let back: [String: [[Double]]]?
 
-    func regions(for side: HeadViewSide) throws -> [HeadPainRegion] {
+    func regions(for side: HeadViewSide, gender: UserGender) throws -> [HeadPainRegion] {
         let rawRegions: [String: [[Double]]]
-        switch side {
-        case .front:
-            guard let front else { throw HeadPainRegionLoadError.missingSide(side) }
-            rawRegions = front
-        case .back:
-            guard let back else { throw HeadPainRegionLoadError.missingSide(side) }
-            rawRegions = back
+        if let genderRegions = regionsByGender(for: gender) {
+            guard let sideRegions = genderRegions.rawRegions(for: side) else {
+                throw HeadPainRegionLoadError.missingSide(gender, side)
+            }
+            rawRegions = sideRegions
+        } else {
+            switch side {
+            case .front:
+                guard let front else { throw HeadPainRegionLoadError.missingSide(gender, side) }
+                rawRegions = front
+            case .back:
+                guard let back else { throw HeadPainRegionLoadError.missingSide(gender, side) }
+                rawRegions = back
+            }
         }
 
         return try rawRegions.map { rawLocation, rawPoints in
@@ -357,5 +404,24 @@ private struct HeadPainRegionPayload: Decodable {
             return HeadPainRegion(location: location, points: points)
         }
         .sorted { $0.location.title < $1.location.title }
+    }
+
+    private func regionsByGender(for gender: UserGender) -> HeadPainGenderRegionPayload? {
+        switch gender {
+        case .female: female
+        case .male: male
+        }
+    }
+}
+
+private struct HeadPainGenderRegionPayload: Decodable {
+    let front: [String: [[Double]]]?
+    let back: [String: [[Double]]]?
+
+    func rawRegions(for side: HeadViewSide) -> [String: [[Double]]]? {
+        switch side {
+        case .front: front
+        case .back: back
+        }
     }
 }
