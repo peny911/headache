@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A0000010000000000000001 /* HeadacheApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000101 /* HeadacheApp.swift */; };
+		2A0000010000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000102 /* ContentView.swift */; };
+		2A0000010000000000000003 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000103 /* Models.swift */; };
+		2A0000010000000000000004 /* HeadacheValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000104 /* HeadacheValidators.swift */; };
+		2A0000010000000000000005 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000105 /* Formatters.swift */; };
+		2A0000010000000000000006 /* EpisodeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000106 /* EpisodeListView.swift */; };
+		2A0000010000000000000007 /* EpisodeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000107 /* EpisodeEditView.swift */; };
+		2A0000010000000000000008 /* HeadPainMapPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000108 /* HeadPainMapPicker.swift */; };
+		2A0000010000000000000009 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0000010000000000000109 /* StatsView.swift */; };
+		2A000001000000000000000A /* MedicationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010A /* MedicationListView.swift */; };
+		2A000001000000000000000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010B /* Assets.xcassets */; };
+		2A000001000000000000000C /* HeadacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010C /* HeadacheTests.swift */; };
+		2A000001000000000000000D /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010E /* ProfileSettingsView.swift */; };
+		2A000001000000000000000E /* head_regions.json in Resources */ = {isa = PBXBuildFile; fileRef = 2A000001000000000000010F /* head_regions.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2A0000010000000000000201 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A0000010000000000000301 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A0000010000000000000401;
+			remoteInfo = Headache;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2A0000010000000000000101 /* HeadacheApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadacheApp.swift; sourceTree = "<group>"; };
+		2A0000010000000000000102 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2A0000010000000000000103 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		2A0000010000000000000104 /* HeadacheValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadacheValidators.swift; sourceTree = "<group>"; };
+		2A0000010000000000000105 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		2A0000010000000000000106 /* EpisodeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeListView.swift; sourceTree = "<group>"; };
+		2A0000010000000000000107 /* EpisodeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeEditView.swift; sourceTree = "<group>"; };
+		2A0000010000000000000108 /* HeadPainMapPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadPainMapPicker.swift; sourceTree = "<group>"; };
+		2A0000010000000000000109 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		2A000001000000000000010A /* MedicationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicationListView.swift; sourceTree = "<group>"; };
+		2A000001000000000000010B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A000001000000000000010C /* HeadacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadacheTests.swift; sourceTree = "<group>"; };
+		2A000001000000000000010D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A000001000000000000010E /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
+		2A000001000000000000010F /* head_regions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = head_regions.json; sourceTree = "<group>"; };
+		2A0000010000000000000501 /* Headache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Headache.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A0000010000000000000502 /* HeadacheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeadacheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A0000010000000000000601 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A0000010000000000000602 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A0000010000000000000701 = {
+			isa = PBXGroup;
+			children = (
+				2A0000010000000000000702 /* Headache */,
+				2A0000010000000000000703 /* HeadacheTests */,
+				2A0000010000000000000704 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2A0000010000000000000702 /* Headache */ = {
+			isa = PBXGroup;
+			children = (
+				2A0000010000000000000101 /* HeadacheApp.swift */,
+				2A0000010000000000000102 /* ContentView.swift */,
+				2A0000010000000000000103 /* Models.swift */,
+				2A0000010000000000000104 /* HeadacheValidators.swift */,
+				2A0000010000000000000105 /* Formatters.swift */,
+				2A0000010000000000000106 /* EpisodeListView.swift */,
+				2A0000010000000000000107 /* EpisodeEditView.swift */,
+				2A0000010000000000000108 /* HeadPainMapPicker.swift */,
+				2A0000010000000000000109 /* StatsView.swift */,
+				2A000001000000000000010A /* MedicationListView.swift */,
+				2A000001000000000000010E /* ProfileSettingsView.swift */,
+				2A000001000000000000010F /* head_regions.json */,
+				2A000001000000000000010B /* Assets.xcassets */,
+				2A000001000000000000010D /* Info.plist */,
+			);
+			path = Headache;
+			sourceTree = "<group>";
+		};
+		2A0000010000000000000703 /* HeadacheTests */ = {
+			isa = PBXGroup;
+			children = (
+				2A000001000000000000010C /* HeadacheTests.swift */,
+			);
+			path = HeadacheTests;
+			sourceTree = "<group>";
+		};
+		2A0000010000000000000704 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A0000010000000000000501 /* Headache.app */,
+				2A0000010000000000000502 /* HeadacheTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2A0000010000000000000401 /* Headache */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A0000010000000000000801 /* Build configuration list for PBXNativeTarget "Headache" */;
+			buildPhases = (
+				2A0000010000000000000901 /* Sources */,
+				2A0000010000000000000601 /* Frameworks */,
+				2A0000010000000000000902 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Headache;
+			productName = Headache;
+			productReference = 2A0000010000000000000501 /* Headache.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2A0000010000000000000402 /* HeadacheTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A0000010000000000000802 /* Build configuration list for PBXNativeTarget "HeadacheTests" */;
+			buildPhases = (
+				2A0000010000000000000903 /* Sources */,
+				2A0000010000000000000602 /* Frameworks */,
+				2A0000010000000000000904 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A0000010000000000000202 /* PBXTargetDependency */,
+			);
+			name = HeadacheTests;
+			productName = HeadacheTests;
+			productReference = 2A0000010000000000000502 /* HeadacheTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A0000010000000000000301 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					2A0000010000000000000401 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					2A0000010000000000000402 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 2A0000010000000000000401;
+					};
+				};
+			};
+			buildConfigurationList = 2A0000010000000000000803 /* Build configuration list for PBXProject "Headache" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = zh-Hans;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				zh-Hans,
+				en,
+				Base,
+			);
+			mainGroup = 2A0000010000000000000701;
+			productRefGroup = 2A0000010000000000000704 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2A0000010000000000000401 /* Headache */,
+				2A0000010000000000000402 /* HeadacheTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2A0000010000000000000902 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A000001000000000000000B /* Assets.xcassets in Resources */,
+				2A000001000000000000000E /* head_regions.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A0000010000000000000904 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A0000010000000000000901 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A0000010000000000000001 /* HeadacheApp.swift in Sources */,
+				2A0000010000000000000002 /* ContentView.swift in Sources */,
+				2A0000010000000000000003 /* Models.swift in Sources */,
+				2A0000010000000000000004 /* HeadacheValidators.swift in Sources */,
+				2A0000010000000000000005 /* Formatters.swift in Sources */,
+				2A0000010000000000000006 /* EpisodeListView.swift in Sources */,
+				2A0000010000000000000007 /* EpisodeEditView.swift in Sources */,
+				2A0000010000000000000008 /* HeadPainMapPicker.swift in Sources */,
+				2A0000010000000000000009 /* StatsView.swift in Sources */,
+				2A000001000000000000000A /* MedicationListView.swift in Sources */,
+				2A000001000000000000000D /* ProfileSettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A0000010000000000000903 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A000001000000000000000C /* HeadacheTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2A0000010000000000000202 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A0000010000000000000401 /* Headache */;
+			targetProxy = 2A0000010000000000000201 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2A0000010000000000000A01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2A0000010000000000000A02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2A0000010000000000000A03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Headache/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Headache;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrick.Headache;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2A0000010000000000000A04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Headache/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Headache;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrick.Headache;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2A0000010000000000000A05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrick.HeadacheTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Headache.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Headache";
+			};
+			name = Debug;
+		};
+		2A0000010000000000000A06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrick.HeadacheTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Headache.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Headache";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A0000010000000000000801 /* Build configuration list for PBXNativeTarget "Headache" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A0000010000000000000A03 /* Debug */,
+				2A0000010000000000000A04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A0000010000000000000802 /* Build configuration list for PBXNativeTarget "HeadacheTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A0000010000000000000A05 /* Debug */,
+				2A0000010000000000000A06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A0000010000000000000803 /* Build configuration list for PBXProject "Headache" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A0000010000000000000A01 /* Debug */,
+				2A0000010000000000000A02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A0000010000000000000301 /* Project object */;
+}
